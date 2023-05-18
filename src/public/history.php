@@ -14,7 +14,7 @@ $statement->execute();
 $contacts = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 if (count($contacts) === 0) {
-    echo 'データなし';
+    echo '送信履歴なし';
 }
 
 // echo '<pre>';

@@ -10,24 +10,26 @@ if (empty($title) || empty($email) || empty($content)) {
         '「タイトル」「Email」「お問い合わせ内容」のどれか記入されていません!';
 }
 
-$dbUserName = 'root';
-$dbPassword = 'password';
-$pdo = new PDO(
-    'mysql:host=mysql; dbname=contactform; charset=utf8',
-    $dbUserName,
-    $dbPassword
-);
+if (!empty($title) && !empty($email) && !empty($content)) {
+    $dbUserName = 'root';
+    $dbPassword = 'password';
+    $pdo = new PDO(
+        'mysql:host=mysql; dbname=contactform; charset=utf8',
+        $dbUserName,
+        $dbPassword
+    );
 
-$stmt = $pdo->prepare("INSERT INTO contacts (
-	title, email, content
-) VALUES (
-	:title, :email, :content
-)");
+    $stmt = $pdo->prepare("INSERT INTO contacts (
+    title, email, content
+  ) VALUES (
+    :title, :email, :content
+  )");
 
-$stmt->bindParam(':title', $title, PDO::PARAM_STR);
-$stmt->bindParam(':email', $email, PDO::PARAM_STR);
-$stmt->bindParam(':content', $content, PDO::PARAM_STR);
-$res = $stmt->execute();
+    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+    $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+    $stmt->bindParam(':content', $content, PDO::PARAM_STR);
+    $res = $stmt->execute();
+}
 ?>
 
 
